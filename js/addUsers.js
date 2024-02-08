@@ -391,6 +391,11 @@ async function getProjectRoles(AccessToken,project_id){
 
 
     // Load the CSV file
+    // JavaScript function to trigger the click event on the file input
+    function openFileExplorer() {
+        document.getElementById('fileInput').click();
+    }
+
     function handleDragOver(event) {
     event.preventDefault();
     event.dataTransfer.dropEffect = 'copy';
@@ -422,19 +427,7 @@ async function getProjectRoles(AccessToken,project_id){
         alert('Please drop a CSV file.');
         return;
     }
-    // JavaScript function to trigger the click event on the file input
-    function openFileExplorer() {
-        document.getElementById('fileInput2').click();
-    }
 
-    // JavaScript function to handle the selected file
-    function handleFileUpload(input) {
-        const file = input.files[0];
-        if (file) {
-            // Do something with the selected file, for example, display its name
-            alert(`Selected file: ${file.name}`);
-        }
-    }
 
     var reader = new FileReader();
     reader.onload = function(event) {

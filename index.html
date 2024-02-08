@@ -39,15 +39,12 @@
 
                     <button type="" class="button" onclick="downloadCSV()">Download Example CSV</button>
 
-                    <div id="drop-area"  ondrop="handleDrop(event)" ondragover="handleDragOver(event)" ondragenter="handleDragEnter(event)" ondragleave="handleDragLeave(event)">
+                    <div id="drop-area" ondrop="handleDrop(event)" ondragover="handleDragOver(event)" ondragenter="handleDragEnter(event)" ondragleave="handleDragLeave(event)">
                         <i class="file-icon fas fa-file-alt"></i>
-                        <p >Drag and drop a CSV file here</p>
+                        <p  onclick="openFileExplorer()">Click here or Drag and drop a CSV file here</p>
                         <input type="file" id="fileInput" onchange="handleFileSelect(event)">
                       </div>
                       <div id="file-info"></div>
-                      <input type="file" id="fileInput2" style="display: none;" onchange="handleFileUpload(this)">
-                      <button onclick="openFileExplorer()">Upload File</button>
-                      
                 </div>
 
 
