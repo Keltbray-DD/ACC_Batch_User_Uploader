@@ -16,10 +16,10 @@
     <header>
         <div class="header-section">
             <img alt="" id="headerlogo" class="logo_H" src="./assets/media/Keltbray-logo_single.png">
-            <h1>Keltbray <br>DD Hub</h1>
+            <h2>Keltbray <br>DD Hub</h2>
         </div>
         <div class="header-section">
-            <h2>Batch User Uploader</h2>
+            <h1>ACC Batch User Uploader</h1>
         </div>
         <div class="header-section">
             <h3></h3>
@@ -39,12 +39,15 @@
 
                     <button type="" class="button" onclick="downloadCSV()">Download Example CSV</button>
 
-                    <div id="drop-area" ondrop="handleDrop(event)" ondragover="handleDragOver(event)" ondragenter="handleDragEnter(event)" ondragleave="handleDragLeave(event)">
+                    <div id="drop-area"  ondrop="handleDrop(event)" ondragover="handleDragOver(event)" ondragenter="handleDragEnter(event)" ondragleave="handleDragLeave(event)">
                         <i class="file-icon fas fa-file-alt"></i>
-                        <p>Drag and drop a CSV file here</p>
+                        <p >Drag and drop a CSV file here</p>
                         <input type="file" id="fileInput" onchange="handleFileSelect(event)">
                       </div>
                       <div id="file-info"></div>
+                      <input type="file" id="fileInput2" style="display: none;" onchange="handleFileUpload(this)">
+                      <button onclick="openFileExplorer()">Upload File</button>
+                      
                 </div>
 
 
