@@ -1,6 +1,3 @@
-const clientId = "UMPIoFc8iQoJ2eKS6GsJbCGSmMb4s1PY";
-const clientSecret = "3VP1GrzLLvOUoEzu";
-
 const hub_id = "b.24d2d632-e01b-4ca0-b988-385be827cb04"
 const account_id = "24d2d632-e01b-4ca0-b988-385be827cb04"
 
@@ -16,12 +13,12 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('submitButton').addEventListener('click', async function(event) {
         event.preventDefault(); // Prevent the default form submission behavior
         try {
-            access_token_create = await generateTokenAccountCreate(clientId, clientSecret);
+            access_token_create = await getAccessToken("account:write");
         } catch {
             console.log("Error: Getting Create Access Token");
         }
         try {
-            access_token_read = await generateTokenAccountRead(clientId, clientSecret);
+            access_token_read = await getAccessToken("account:read");
         } catch {
             console.log("Error: Getting Create Access Token");
         }
@@ -97,7 +94,39 @@ async function addNewUser(access_token_create, access_token_read,userEmail,roles
           });
 
     }
+async function getAccessToken(scopeInput){
 
+    const bodyData = {
+        scope: scopeInput,
+        };
+
+    const headers = {
+        'Content-Type':'application/json'
+    };
+
+    const requestOptions = {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(bodyData)
+    };
+
+    const apiUrl = "https://prod-18.uksouth.logic.azure.com:443/workflows/d8f90f38261044b19829e27d147f0023/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=-N-bYaES64moEe0gFiP5J6XGoZBwCVZTmYZmUbdJkPk";
+    //console.log(apiUrl)
+    //console.log(requestOptions)
+    signedURLData = await fetch(apiUrl,requestOptions)
+        .then(response => response.json())
+        .then(data => {
+            const JSONdata = data
+
+        //console.log(JSONdata)
+
+        return JSONdata.access_token
+        })
+        .catch(error => console.error('Error fetching data:', error));
+
+
+    return signedURLData
+    }
 async function generateTokenAccountCreate(clientId,clientSecret){
     const bodyData = {
     client_id: clientId,
@@ -479,7 +508,7 @@ async function getProjectRoles(AccessToken,project_id){
         try {
             const url = new URL(urlInputValue);
             const projectId = url.pathname.split('/')[4];
-            const accesstoken = await generateTokenDataRead(clientId, clientSecret)
+            const accesstoken = await getAccessToken("data:read")
             const projectName = await getProjectDetails(accesstoken,projectId)
 
             // Update extracted IDs in the HTML
