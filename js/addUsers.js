@@ -566,7 +566,7 @@ function downloadCSV() {
 
 function getTimeStamp(){
     // Get current timestamp
-    var timestamp = Date.now(); 
+    var timestamp = Date.now();
 
     // Convert timestamp to a human-readable date and time string
     var dateString = new Date(timestamp).toLocaleString();
